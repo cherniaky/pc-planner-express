@@ -1,0 +1,15 @@
+<% layout('layout') -%>
+    <div id="errorPage">
+        <section id="errorTitle">
+            <h1>
+                error
+            </h1>
+        </section>
+        <section id="errorDetails">
+            <% if (error.status) { %>
+                <p><code><%= error.status %></code></p>
+                <% } %>
+                    <p><code><%= message %></code></p>
+                    <button id="goBack" onclick="window.history.back();"><i class="las la-undo"></i> Go back</button>
+        </section>
+    </div>
