@@ -21,6 +21,23 @@
     --footer-height: 200px;
     --table-header-color: #4f4e4e;
 }
+@keyframes bounce {
+  0% {
+    top: 0px;
+  }
+  25% {
+    top: -3px;
+  }
+  50% {
+    top: 0px;
+  }
+  75% {
+    top: 2px;
+  }
+  100% {
+    top: 0px;
+  }
+}
 
 body {
     min-height: 100vh;
@@ -135,7 +152,7 @@ a {
     }
 
     body.expand #burger div:nth-child(2) {
-        animation: bounce 0.2s linear none 1;
+        animation: bounce 0.2s ;
     }
     #burger:focus {
         outline: none;
