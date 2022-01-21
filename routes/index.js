@@ -43,13 +43,13 @@ var manufacturer_controller = require("../controllers/manufactureController");
 // // POST request to update Category.
 // router.post("/category/:id/update", category_controller.category_update_post);
 
-// // GET request for one Category.
-// router.get("/category/:id", category_controller.category_detail);
+ // GET request for one Category.
+ router.get("/category/:id", category_controller.category_detail);
 
-// // GET request for list of all Categories.
+ // GET request for list of all Categories.
  router.get("/categories", category_controller.category_list);
 
-// /// COMPUTERPART ROUTES ///
+ /// COMPUTERPART ROUTES ///
 
 // // GET request for creating ComputerPart. NOTE This must come before route for id (i.e. display computerpart).
 // router.get(
@@ -148,7 +148,7 @@ var manufacturer_controller = require("../controllers/manufactureController");
 // // GET request for one Manufacturer.
 // router.get("/manufacturer/:id", manufacturer_controller.manufacturer_detail);
 
-// // GET request for list of all Manufactuers.
-// router.get("/manufacturers", manufacturer_controller.manufacturer_list);
+ // GET request for list of all Manufactuers.
+ router.get("/manufacturers", manufacturer_controller.manufacturer_list);
 
 module.exports = router;

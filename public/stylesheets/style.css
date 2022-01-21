@@ -11,7 +11,7 @@
     --accent1: #f8d23c;
     --accent2: #e3d081;
     --fg: #1e1e1e;
-    --bg: rgb(63, 63, 63);
+    --bg: rgb(41, 41, 41);
     --black: #181818;
     --font-color: #dddddd;
     --input-gradient-1: #494536;
@@ -257,6 +257,7 @@ footer {
 }
 .title {
     align-self: center;
+  
 }
 
 .create-section {
@@ -286,4 +287,173 @@ footer {
 
 .list a {
     color: var(--accent1);
+}
+
+/* category detail */
+.detail-title{
+    width: 60%;
+    text-align: center;
+}
+
+.detail-title h1{
+    margin: 14px;
+    margin-bottom: 5px;
+}
+
+.edit-links{
+    font-size: 14px;
+   
+}
+.edit-links a{
+ color: var(--table-header-color);
+}
+.edit-links a:hover{
+ color: var(--accent1);
+}
+.widescreen{
+    margin-right: 15px;
+    margin-left: 5px;
+}
+.description{
+    margin: 20px;
+    margin-top: 25px;
+    margin-bottom: 20px;
+}
+.filter-section{
+    background-color: var(--fg);
+    display: flex;
+    justify-content: space-between;
+    padding: 0 10%;
+    width: 100%;
+    margin-top: 25px;
+}
+.table-container{
+    margin: 0 ;
+    width: 100%;
+    background-color: var(--fg);
+}
+#numProductsContainer{
+    position: relative;
+    top:-8px;
+    font-size: 14px;
+    text-shadow: 0 0 15px black;
+}
+#filterForm{
+    font-size: 12px;
+    position: relative;
+    top:-25px;
+    border: 0px;
+  color: var(--accent1);
+  font-weight: bold;
+  text-shadow: 0 0 15px black;
+}
+#filterForm input:focus + legend{
+     animation: bounce 0.2s;
+}
+legend {
+  padding: 0 2px;
+  margin-left: 10px;
+  font-size: 12px;
+  font-weight: bold;
+  font-family: "Raleway", sans-serif;
+  transition: 0.2s;
+  text-shadow: 0 0 7px #000000c9;
+  position: relative;
+  top: 0;
+}
+fieldset {
+  padding: 0;
+  border-radius: 2px;
+  color: var(--accent1);
+  background: radial-gradient(var(--input-gradient-1), var(--input-gradient-2));
+  border: 2px solid var(--input-gradient-2);
+  transition: border 0.2s;
+  box-shadow: 0 0 10px #0000002e;
+  margin-bottom: 30px;
+  position: relative;
+  top: 0;
+}
+fieldset:focus-within {
+  transition: border 0.2s;
+  border: 2px solid var(--accent1);
+  /* outline: none; */
+}
+
+fieldset:focus-within legend {
+  animation: bounce 0.2s linear none 1;
+}
+
+#filterForm input{
+    color: var(--accent1);
+    margin: 5px 10px;
+    border: none;
+   background-color: transparent;
+}
+#filterForm input::placeholder{
+    color: var(--accent2);
+}
+input:focus {
+    outline: none;
+}
+.table-container{
+    display: flex;
+    justify-content: center;
+   padding-bottom: 40px;
+}
+.table-container table{
+    width: 80%;
+}
+thead tr{
+    text-align: left;
+    color: var(--table-header-color);
+    border-bottom: 1px solid white;
+    
+}
+thead tr th{
+    padding: 5px;
+    margin-left: 5px;
+    border-bottom: 1px solid var(--input-gradient-2);
+}
+.part-name-container{
+    display: flex;
+    align-items: center;
+    
+}
+.part-name-container > a{
+    margin-left: 10px;
+}
+.list-image-container .imgNotFound{
+    background-color: black;
+    width: 52.5px;
+    height: 52.5px;
+    padding: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+tbody a{
+    color: var(--accent1);
+}
+tbody td{
+    padding: 20px 5px;
+    color: var(--accent1);
+    border-bottom: 1px solid var(--input-gradient-2);
+}
+.part-add button{
+    border: none;
+    background-color: var(--accent1);
+   padding: 7px 10px;
+   border-radius: 5px;
+}
+
+
+#notFound td{
+   height:fit-content;
+   border: none;
+   display: flex;
+   justify-content:center;
+vertical-align: middle;
+ width: 320%;
+   font-size: 90px;
+   color: var(--table-header-color);
 }

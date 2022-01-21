@@ -1,0 +1,90 @@
+<% layout('layout') -%>
+
+    <section class="title detail-title">
+        <h1>
+            <%= category.title %>
+        </h1>
+        <!-- <button id="dropdown"><i class="fas fa-caret-down"></i></button> -->
+        <div class="edit-links collapsed">
+            <a href="<%= category.url%>/update"><i class="fas fa-wrench"></i><span class="widescreen">Update</span></a>
+            <a href="<%= category.url%>/delete"><i class="fas fa-trash"></i><span class="widescreen">Delete</span></a>
+        </div>
+    </section>
+    <section class="title detail-title">
+        <p class="description">
+            <%= category.description %>
+        </p>
+    </section>
+    <section class="filter-section">
+        <div id="numProductsContainer"><span id="numProducts">
+                <%= category_parts.length %>
+            </span> product(s)</div>
+        <form id="filterForm">
+            <fieldset>
+                <legend>SEARCH</legend>
+                <input type="text" name="filter" id="filter" placeholder="<%= category.title %>">
+            </fieldset>
+        </form>
+    </section>
+    <div class="table-container">
+        <table cellspacing="0" id='category-table'>
+            <thead>
+                <tr>
+                    <th><span>Name</span></th>
+                    <th><span>Manufacturer</span></th>
+                    <th data-sort-method='number'><span>Stock</span></th>
+                    <th data-sort-method='number' colspan="2"><span>Price</span></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr id="notFound" class="<%= category_parts.length == 0 ? '' : 'hidden' %>">
+                    <td colspan=5 id="not-found-cell"><i class="fas fa-sad-tear"></i></td>
+                </tr>
+                <% category_parts.forEach(part=> { %>
+                    <tr class="part-row" data-part="<%= part.name %>">
+                        <td class="part-name">
+                            <div class="part-name-container">   
+                                <div class="list-image-container">
+                                    <% if (part.fileName) { %>
+                                        <a href="<%= part.url %>">
+                                            <img src="/images/<%= part.fileName %>" alt="">
+                                        </a>
+                                        <% } else { %>
+                                            <div class="imgNotFound"><i class="fas fa-question"></i></div>
+                                            <% } %>
+
+                                </div>
+                                <!-- <div class="th-small">Name</div> -->
+                                <a href="<%= part.url %>">
+                                    <%= part.name %>
+                                </a>
+                            </div>
+                        </td>
+                        <td class="part-manufacturer">
+                            <!-- <div class="th-small">Manufacturer</div> -->
+                            <a href="<%= part.manufacturer.url %>">
+                                <%= part.manufacturer.name %>
+                            </a>
+                        </td>
+                        <td class="part-stock">
+                            <!-- <div class="th-small">Stock</div> -->
+                            <span class="inStock amount">
+                                <%= part.inStock %>
+                            </span>
+                        </td>
+                        <td class="part-price">
+                            <!-- <div class="th-small">Price</div> -->
+                            <span class="amount">$<%= part.price %></span>
+                        </td>
+                        <td class="part-add"><button class="yellow-btn add" data-categoryid="<%= category._id %> "
+                                data-partid='<%= part._id %>'>Add</button></td>
+                    </tr>
+                    <% }) %>
+            </tbody>
+            <tfoot>
+                <tr>
+
+                </tr>
+            </tfoot>
+        </table>
+    </div>
