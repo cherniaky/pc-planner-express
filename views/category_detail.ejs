@@ -43,7 +43,7 @@
                 <% category_parts.forEach(part=> { %>
                     <tr class="part-row" data-part="<%= part.name %>">
                         <td class="part-name">
-                            <div class="part-name-container">   
+                            <div class="part-name-container">
                                 <div class="list-image-container">
                                     <% if (part.fileName) { %>
                                         <a href="<%= part.url %>">
@@ -76,8 +76,8 @@
                             <!-- <div class="th-small">Price</div> -->
                             <span class="amount">$<%= part.price %></span>
                         </td>
-                        <td class="part-add"><button class="yellow-btn add" data-categoryid="<%= category._id %> "
-                                data-partid='<%= part._id %>'>Add</button></td>
+                        <!-- <td class="part-add"><button class="yellow-btn add" data-categoryid="<%= category._id %> "
+                                data-partid='<%= part._id %>'>Add</button></td> -->
                     </tr>
                     <% }) %>
             </tbody>

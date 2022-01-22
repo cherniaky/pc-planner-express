@@ -1,9 +1,10 @@
+require("dotenv").config();
+
 var Category = require("../models/category");
 var ComputerPart = require("../models/computerpart");
 var async = require("async");
 
-const { body, validationResult } = require("express-validator/check");
-const { sanitizeBody, sanitize } = require("express-validator/filter");
+const { body, validationResult } = require("express-validator");
 
 var mongoose = require("mongoose");
 
@@ -12,7 +13,6 @@ exports.category_list = function (req, res, next) {
     Category.find().exec(function (err, list_categories) {
         if (err) return next(err);
 
-        
         res.render("category_list", {
             title: "All Categories",
             category_list: list_categories,
@@ -68,11 +68,9 @@ exports.category_create_post = [
     body("title")
         .trim()
         .isLength({ min: 1 })
-        .withMessage("Category name must be specified"),
-    body("description").optional({ checkFalsy: true }),
-
-    sanitize("title").escape(),
-    sanitize("description").escape(),
+        .withMessage("Category name must be specified")
+        .escape(),
+    body("description").optional({ checkFalsy: true }).escape(),
 
     (req, res, next) => {
         const errors = validationResult(req);
@@ -124,11 +122,13 @@ exports.category_delete_get = function (req, res, next) {
                 err.status = 404;
                 return next(err);
             }
+            console.log(results.category_parts.length);
 
             res.render("category_delete", {
                 title: "Delete Category: " + results.category.title,
                 category: results.category,
-                category_parts: results.category_parts,
+                category_parts:results.category_parts,
+                have_items: results.category_parts.length == 0? false:true,
             });
         }
     );
@@ -136,10 +136,33 @@ exports.category_delete_get = function (req, res, next) {
 
 // Handle Category delete on POST.
 exports.category_delete_post = function (req, res, next) {
+    //console.log(process.env.ADMIN_PASSWORD);
     if (req.body.password != process.env.ADMIN_PASSWORD) {
-        let err = new Error("The password you entered is incorrect.");
-        err.status = 401;
-        return next(err);
+        async.parallel(
+            {
+                category: function (callback) {
+                    Category.findById(req.params.id).exec(callback);
+                },
+                category_parts: function (callback) {
+                    ComputerPart.find({ category: req.params.id }).exec(
+                        callback
+                    );
+                },
+            },
+            function (err, results) {
+                if (err) return next(err);
+
+                res.render("category_delete", {
+                    title: "Delete Category: " + results.category.title,
+                    category: results.category,
+                    category_parts: results.category_parts,
+                    error: "Wrong password",
+                });
+
+                return;
+            }
+        );
+        //next(err)
     } else {
         async.parallel(
             {
@@ -211,9 +234,27 @@ exports.category_update_post = [
 
     (req, res, next) => {
         if (req.body.password != process.env.ADMIN_PASSWORD) {
-            let err = new Error("The password you entered is incorrect.");
-            err.status = 401;
-            return next(err);
+            Category.findById(req.params.id, function (err, category) {
+                if (err) return next(err);
+
+                if (category == null) {
+                    var err = new Error("Category not found");
+                    err.status = 404;
+                    return next(err);
+                }
+                var categoryNew = new Category({
+                    title: req.body.title,
+                    description: req.body.description,
+                    _id: req.params.id,
+                });
+                //Success
+                res.render("category_form", {
+                    title: "Update Category",
+                    category: categoryNew,
+                    isUpdating: true,
+                    errors: ["Wrong password"],
+                });
+            });
         } else {
             const errors = validationResult(req);
 

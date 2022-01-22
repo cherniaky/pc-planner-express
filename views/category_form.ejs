@@ -1,0 +1,41 @@
+<% layout('layout') -%>
+    <section class="title">
+        <h1 class="form-header">
+            <%= title %>
+        </h1>
+    </section>
+
+    <section class="form-section">
+        <form action="" method="POST">
+            <fieldset>
+                <legend>TITLE</legend>
+                <input required type="text" name="title" id="title" maxlength="30"
+                    value="<%= typeof category == 'undefined' ? '' : category.title %>" />
+            </fieldset>
+            <fieldset>
+                <legend>DESCRIPTION</legend>
+                <textarea name="description" id="description" cols="30" rows="10" maxlength="500">
+<%= typeof category == 'undefined' ? '' : category.description %></textarea>
+            </fieldset>
+            <% if (isUpdating) { %>
+                <fieldset>
+                    <legend>ADMIN PASSWORD</legend>
+                    <input type="password" name="password" id="password" required>
+                </fieldset>
+                <% } %>
+                <% if (typeof errors !='undefined' ) { %>
+                    <ul>
+                        <% errors.forEach(err=> { %>
+                            <li class="errorMsg">
+                                <%= err %>
+                            </li>
+                            <% }) %>
+                    </ul>
+                    <% } %>
+                    <div class="part-add"><button type="submit" class="yellow-btn block">Submit</button> </div>
+        </form>
+
+       
+
+                <a class="cancel block" href="<%= typeof category == 'undefined' ? '/categories' : category.url %>">Cancel</a>
+    </section>
