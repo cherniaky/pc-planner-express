@@ -128,7 +128,6 @@ exports.category_delete_get = function (req, res, next) {
                 title: "Delete Category: " + results.category.title,
                 category: results.category,
                 category_parts:results.category_parts,
-                have_items: results.category_parts.length == 0? false:true,
             });
         }
     );
