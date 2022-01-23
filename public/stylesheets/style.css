@@ -8,7 +8,7 @@
     box-sizing: border-box;
 }
 :root {
-    --accent1: #f8d23c;
+    --accent1: #c5a730;
     --accent2: #e3d081;
     --fg: #1e1e1e;
     --bg: rgb(41, 41, 41);
@@ -396,7 +396,7 @@ fieldset:focus-within legend {
 input:focus {
     outline: none;
 }
-textarea:focus{
+textarea:focus {
     outline: none;
 }
 .table-container {
@@ -424,7 +424,7 @@ thead tr th {
 .part-name-container > a {
     margin-left: 10px;
 }
-.list-image-container .imgNotFound {
+.imgNotFound {
     background-color: black;
     width: 52.5px;
     height: 52.5px;
@@ -449,20 +449,19 @@ tbody td {
 }
 
 #notFound td {
-  
     border: none;
-   text-align: center;
+    text-align: center;
     vertical-align: middle;
-   
+
     font-size: 90px;
     color: var(--table-header-color);
 }
-.block{
+.block {
     display: block;
     width: 100%;
 }
 
-fieldset input{
+fieldset input {
     background-color: transparent;
     border: none;
     margin: 5px;
@@ -470,24 +469,24 @@ fieldset input{
     width: 100%;
     padding: 5px;
 }
-fieldset textarea{
+fieldset textarea {
     background-color: transparent;
     border: none;
     margin: 5px;
     color: var(--accent1);
-     resize: vertical;
-     width: 97%;
+    resize: vertical;
+    width: 97%;
 }
-.form-header{
+.form-header {
     font-size: 24px;
     margin: 20px;
 }
-.deleteSection{
+.deleteSection {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
-.cancel{
+.cancel {
     text-align: center;
     background-color: var(--fg);
     color: var(--accent1);
@@ -496,46 +495,138 @@ fieldset textarea{
     border-radius: 3px;
 }
 
-.form-section{
+.form-section {
     width: 35%;
 }
-.delete{
+.delete {
     margin: 20px;
     text-align: center;
 }
-#deleteMsg{
-    margin: 20px ;
-    font-size: 14px
+#deleteMsg {
+    margin: 20px;
+    font-size: 14px;
 }
-#deleteList{
-    list-style:disc;
+#deleteList {
+    list-style: disc;
     margin: 20px 0;
     width: 70%;
 }
-#deleteList  a{
- color: var(--accent1);
+#deleteList a {
+    color: var(--accent1);
 }
-#deleteList  a:hover{
+#deleteList a:hover {
     text-decoration: underline;
 }
-button{
+button {
     border-radius: 3px;
 }
-#confirmationMsg{
+#confirmationMsg {
     margin: 15px 0;
 }
 .deleteSection form {
     width: 100%;
 }
-.delete-btn{
+.delete-btn {
     cursor: pointer;
     padding: 5px;
     border: none;
-    background-color:  var(--accent1);
-    color:var(--fg);
+    background-color: var(--accent1);
+    color: var(--fg);
 }
-.errorMsg{
+.errorMsg {
     text-align: center;
     margin-bottom: 20px;
     color: red;
+}
+
+.component-details {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.component-details--img {
+    margin: 30px;
+}
+
+.component-details--img .imgNotFound {
+    width: 150px;
+    height: 150px;
+    font-size: 30px;
+}
+.component-details--details {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    width: 70%;
+}
+.component-details--details-left {
+    display: flex;
+    flex-direction: column;
+}
+.component-details--details-left a {
+    color: var(--accent2);
+}
+.component-details--details-left div {
+    margin-bottom: 10px;
+    min-width: max-content;
+}
+.features-list-container {
+    margin-left: 50px;
+    width: 50%;
+    min-width: 200px;
+}
+.th-small {
+    font-size: 13px;
+    color: var(--accent1);
+}
+.features-list-container li{
+    font-size: 16px;
+    color: white;
+    padding: 5px;
+    border-bottom: 1px solid #6b6b6b ;
+}
+button{
+    cursor: pointer;
+}
+#componentFormContainer{
+    width: 60%;
+}
+
+.component-details--img{
+text-align: center;
+display: flex;
+justify-content: center;
+}
+#price-input{
+    display: flex;
+    align-items: center;
+    padding: 5px;
+}
+#features{
+    margin-bottom: 0;
+}
+#feature-sub{
+    color: var(--accent1);
+}
+#price-stock-container{
+    margin-top: 20px;
+}
+fieldset select{
+    width: 95%;
+    margin: 15px;
+    background-color:#4D4836;
+    border: none;
+    color: var(--accent1);
+}
+fieldset select:focus{
+    outline: none;
+}
+select option{
+    padding: 15px;
+   
+}
+.label{
+    margin: 15px;
+    cursor: pointer;
 }

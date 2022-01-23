@@ -1,0 +1,65 @@
+<% layout('layout') -%>
+    
+        <section class="title detail-title">
+            <h1>
+                <%= title %>
+            </h1>
+            <!-- <button id="dropdown"><i class="fas fa-caret-down"></i></button> -->
+            <div class="edit-links collapsed">
+                <a href="<%= component.url%>/update"><i class="fas fa-wrench"></i><span
+                        class="widescreen">Update</span></a>
+                <a href="<%= component.url%>/delete"><i class="fas fa-trash"></i><span
+                        class="widescreen">Delete</span></a>
+            </div>
+        </section>
+        <section class="component-details">
+            <div class="component-details--img">
+                <% if (component.fileName) { %>
+                    <img src="/images/<%= component.fileName %>" alt="<%= component.fileName %>">
+                    <% } else { %>
+                        <div class="imgNotFound"><i class="fas fa-question"></i></div>
+                        <% } %>
+                            <!-- <button class="yellow-btn add widescreen" data-categoryid="<%= category._id %> "
+                                data-partid='<%= component._id %>'>Add</button> -->
+            </div>
+            <div class="component-details--details">
+                <div class="component-details--details-left">
+                <div>
+                    <section class="th-small">Category</section>
+                    <a href="<%= category.url %>">
+                        <%= category.title %>
+                    </a>
+                </div>
+                <div>
+                    <div class="th-small">Manufacturer</div>
+                    <a href="<%= manufacturer.url %>">
+                        <%= manufacturer.name %>
+                    </a>
+                </div>
+                <div>
+                    <div class="th-small">Price</div>
+                    <span class="amount accent2">$<%= component.price %></span>
+                </div>
+                <div>
+                    <div class="th-small">Stock</div>
+                    <span class="inStock amount accent2">
+                        <%= component.inStock %>
+                    </span>
+                </div>
+                </div>
+                <div class="features-list-container">
+                    <div class="th-small">Features</div>
+                    <ul>
+                        <% component.description.split(',').forEach(spec=> { %>
+                            <% if (spec.trim().length> 0) { %>
+                                <li>
+                                    <%= spec %>
+                                </li>
+                                <% } %>
+                                    <% }) %>
+                    </ul>
+                </div>
+                <!-- <button class="yellow-btn add" data-categoryid="<%= category._id %> "
+                    data-partid='<%= component._id %>'>Add</button> -->
+            </div>
+        </section>

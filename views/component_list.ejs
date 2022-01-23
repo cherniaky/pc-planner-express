@@ -1,0 +1,105 @@
+<% layout('layout') -%>
+
+    
+        <section class="title detail-title">
+            <h1>
+                <%= title %>
+            </h1>
+            <!-- <a class="create-link" href="/component/create">
+                <i class="fas fa-plus"></i>
+            </a> -->
+        </section>
+
+        <section class="create-section component-list"><a href="/component/create"><i class="fas fa-plus"></i> Add a new
+                part</a></section>
+
+        <!-- <div class="widescreen-numprod-filter">
+            <section class="component-list numProductsSection">
+                <p id="numProductsContainer"><span id="numProducts">
+                        <%= component_list.length %>
+                    </span> product(s)</p>
+            </section>
+            <section class="filter-section component-list">
+                <form id="filterForm">
+                    <fieldset>
+                        <legend>SEARCH</legend>
+                        <input type="text" name="filter" id="filter" placeholder="Components">
+                    </fieldset>
+                </form>
+            </section>
+        </div> -->
+
+        <section class="filter-section">
+            <div id="numProductsContainer"><span id="numProducts">
+                    <%=  component_list.length %>
+                </span> product(s)</div>
+            <form id="filterForm">
+                <fieldset>
+                    <legend>SEARCH</legend>
+                    <input type="text" name="filter" id="filter" placeholder="Components">
+                </fieldset>
+            </form>
+        </section>
+
+        <div class="table-container">
+            <table cellspacing="0" id="component-table">
+                <thead>
+                    <tr>
+                        <th><span>Name</span></th>
+                        <th><span>Manufacturer</span></th>
+                        <th><span>Category</span></th>
+                        <th data-sort-method='number' colspan="2"><span>Price</span></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr id="notFound" class="<%= component_list.length == 0 ? '' : 'hidden' %>">
+                        <td colspan="5"><i class="fas fa-sad-tear"></i></td>
+                    </tr>
+                    <% component_list.forEach(component=> { %>
+                        <tr class="part-row " data-part="<%= component.name %>">
+                            <td class="part-name">
+                                <div class="part-name-container">
+                                    <div class="list-image-container">
+                                        <% if (component.fileName) { %>
+                                            <a href="<%= component.url %>">
+                                                <img src="/images/<%= component.fileName %>" alt="">
+                                            </a>
+                                            <% } else { %>
+                                                <div class="imgNotFound"><i class="fas fa-question"></i></div>
+                                                <% } %>
+                                    </div>
+                                    <!-- <div class="th-small">Name</div> -->
+                                    <a href="<%= component.url %>">
+                                        <%= component.name %>
+                                    </a>
+                                </div>
+                            </td>
+                            <td class="part-manufacturer">
+                                <!-- <div class="th-small">Manufacturer</div> -->
+                                <a href="<%= component.manufacturer.url %>">
+                                    <%= component.manufacturer.name %>
+                                </a>
+                            </td>
+                            <td class="part-category">
+                                <!-- <div class="th-small">Category</div> -->
+                                <a href="<%= component.category.url %>">
+                                    <%= component.category.title %>
+                                </a>
+                            </td>
+                            <td class="part-price">
+                                <!-- <div class="th-small">Price</div> -->
+                                <span class="amount">$<%= component.price %></span>
+                            </td>
+                            <!-- <td class="part-add">
+                                <button class="yellow-btn add" data-categoryid="<%= component.category._id %> "
+                                    data-partid='<%= component._id %>'>Add</button>
+                            </td> -->
+                        </tr>
+                        <% }) %>
+                </tbody>
+                <tfoot>
+                    <tr></tr>
+                </tfoot>
+            </table>
+        </div>
+    

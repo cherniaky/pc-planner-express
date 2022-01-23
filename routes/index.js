@@ -52,17 +52,17 @@ router.post("/category/create", category_controller.category_create_post);
  /// COMPUTERPART ROUTES ///
 
 // // GET request for creating ComputerPart. NOTE This must come before route for id (i.e. display computerpart).
-// router.get(
-//   "/component/create",
-//   computerpart_controller.computerpart_create_get
-// );
+router.get(
+  "/component/create",
+  computerpart_controller.computerpart_create_get
+);
 
 // // POST request for creating ComputerPart.
-// router.post(
-//   "/component/create",
-//   upload.single("part_image"),
-//   computerpart_controller.computerpart_create_post
-// );
+router.post(
+  "/component/create",
+ // upload.single("part_image"),
+  computerpart_controller.computerpart_create_post
+);
 
 // // GET request to delete ComputerPart.
 // router.get(
@@ -102,10 +102,10 @@ router.post("/category/create", category_controller.category_create_post);
 // );
 
 // // GET request for one ComputerPart.
-// router.get("/component/:id", computerpart_controller.computerpart_detail);
+ router.get("/component/:id", computerpart_controller.computerpart_detail);
 
 // // GET request for list of all ComputerParts.
-// router.get("/components", computerpart_controller.computerpart_list);
+ router.get("/components", computerpart_controller.computerpart_list);
 
  /// MANUFACTURER ROUTES ///
 
