@@ -1,0 +1,41 @@
+<% layout('layout') -%>
+    <section class="title">
+        <h1 class="form-header">
+            <%= title %>
+        </h1>
+    </section>
+
+    <section>
+        <form action="" method="POST">
+            <fieldset for="name">
+                <legend>NAME</legend>
+                <input required type="text" name="name" id="name"
+                    value="<%= typeof manufacturer == 'undefined' ? '' : manufacturer.name %>" />
+            </fieldset>
+            <fieldset for="description">
+                <legend>DESCRIPTION</legend>
+                <textarea name="description" id="description" cols="30" rows="10">
+<%= typeof manufacturer == 'undefined' ? '' : manufacturer.description %></textarea>
+            </fieldset>
+            <% if (isUpdating) { %>
+                <fieldset>
+                    <legend>ADMIN PASSWORD</legend>
+                    <input type="password" name="password" id="password" required>
+                </fieldset>
+                <% } %>
+
+                    <% if (typeof errors !='undefined' ) { %>
+                        <ul>
+                            <% errors.forEach(err=> { %>
+                                <li class="errorMsg">
+                                    <%= err %>
+                                </li>
+                                <% }) %>
+                        </ul>
+                        <% } %>
+
+                            <div class="part-add"> <button type="submit" class="yellow-btn block">Submit</button></div>
+        </form>
+        <a class="cancel block"
+            href="<%= typeof manufacturer == 'undefined' ? '/manufacturers' : manufacturer.url %>">Cancel</a>
+    </section>

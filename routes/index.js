@@ -107,46 +107,46 @@ router.post("/category/create", category_controller.category_create_post);
 // // GET request for list of all ComputerParts.
 // router.get("/components", computerpart_controller.computerpart_list);
 
-// /// MANUFACTURER ROUTES ///
+ /// MANUFACTURER ROUTES ///
 
-// // GET request for creating Manufacturer. NOTE This must come before route for id (i.e. display manufacturer).
-// router.get(
-//   "/manufacturer/create",
-//   manufacturer_controller.manufacturer_create_get
-// );
+// GET request for creating Manufacturer. NOTE This must come before route for id (i.e. display manufacturer).
+ router.get(
+   "/manufacturer/create",
+  manufacturer_controller.manufacturer_create_get
+ );
 
-// // POST request for creating Manufacturer.
-// router.post(
-//   "/manufacturer/create",
-//   manufacturer_controller.manufacturer_create_post
-// );
+ // POST request for creating Manufacturer.
+router.post(
+  "/manufacturer/create",
+  manufacturer_controller.manufacturer_create_post
+);
 
 // // GET request to delete Manufacturer.
-// router.get(
-//   "/manufacturer/:id/delete",
-//   manufacturer_controller.manufacturer_delete_get
-// );
+router.get(
+  "/manufacturer/:id/delete",
+  manufacturer_controller.manufacturer_delete_get
+);
 
 // // POST request to delete Manufacturer.
-// router.post(
-//   "/manufacturer/:id/delete",
-//   manufacturer_controller.manufacturer_delete_post
-// );
+router.post(
+  "/manufacturer/:id/delete",
+  manufacturer_controller.manufacturer_delete_post
+);
 
-// // GET request to update Manufacturer.
-// router.get(
-//   "/manufacturer/:id/update",
-//   manufacturer_controller.manufacturer_update_get
-// );
+ // GET request to update Manufacturer.
+router.get(
+  "/manufacturer/:id/update",
+  manufacturer_controller.manufacturer_update_get
+);
 
 // // POST request to update Manufacturer.
-// router.post(
-//   "/manufacturer/:id/update",
-//   manufacturer_controller.manufacturer_update_post
-// );
+router.post(
+  "/manufacturer/:id/update",
+  manufacturer_controller.manufacturer_update_post
+);
 
-// // GET request for one Manufacturer.
-// router.get("/manufacturer/:id", manufacturer_controller.manufacturer_detail);
+ // GET request for one Manufacturer.
+ router.get("/manufacturer/:id", manufacturer_controller.manufacturer_detail);
 
  // GET request for list of all Manufactuers.
  router.get("/manufacturers", manufacturer_controller.manufacturer_list);

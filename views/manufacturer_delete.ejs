@@ -1,0 +1,41 @@
+<% layout('layout') -%>
+
+    <section class="title delete">
+        <h1>Delete Manufacturer:</h1>
+        <h2>
+            <%= manufacturer.name %>
+        </h2>
+    </section>
+
+    <section class="deleteSection">
+        <% if (manufacturer_parts.length> 0) { %>
+            <p id="deleteMsg">Must delete the following parts before removing this manufacturer:</p>
+            <ul id="deleteList">
+                <% manufacturer_parts.forEach(part=> { %>
+                    <li><a href="<%= part.url %>">
+                            <%= part.name %>
+                        </a></li>
+                    <% }) %>
+            </ul>
+            <% } else { %>
+                <p id="confirmationMsg">Are you sure you want to delete this manufacturer?</p>
+
+                <form action="" method="POST">
+                    <input type="hidden" name="id" id="id" value="<%= manufacturer._id %>" required>
+                    <fieldset>
+                        <legend>ADMIN PASSWORD</legend>
+                        <input type="password" name="password" id="password" required>
+                    </fieldset>
+                    <% if (typeof error !='undefined' ) { %>
+                    
+                        <p class="errorMsg">
+                            <%= error %>
+                        </p>
+                    
+                        <% } %>
+                    <button type="submit" class="yellow-btn delete-btn block">Delete</button>
+                </form>
+                <% } %>
+                    <a class="cancel block"
+                        href="<%= typeof manufacturer == 'undefined' ? '/manufacturers' : manufacturer.url %>">Cancel</a>
+    </section>

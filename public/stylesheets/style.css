@@ -449,12 +449,11 @@ tbody td {
 }
 
 #notFound td {
-    height: fit-content;
+  
     border: none;
-    display: flex;
-    justify-content: center;
+   text-align: center;
     vertical-align: middle;
-    width: 320%;
+   
     font-size: 90px;
     color: var(--table-header-color);
 }
