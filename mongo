@@ -1,1 +1,3 @@
 mongodb+srv://cherniak:cherniak@cluster0.vizbj.mongodb.net/pc-planner?retryWrites=true&w=majority
+document.querySelector("#filter").classList['value'].includes(substring)
+document.querySelectorAll("tr")[2].dataset["part"]
