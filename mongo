@@ -1,2 +1,12 @@
 document.querySelector("#filter").classList['value'].includes(substring)
 document.querySelectorAll("tr")[2].dataset["part"]
+{
+  fieldname: 'part_image',
+  originalname: 'photo_2020-12-09_16-14-17.jpg',
+  encoding: '7bit',
+  mimetype: 'image/jpeg',
+  destination: 'public/images',
+  filename: '1643017319338-photo_2020-12-09_16-14-17.jpg',
+  path: 'public\\images\\1643017319338-photo_2020-12-09_16-14-17.jpg',
+  size: 30601
+}

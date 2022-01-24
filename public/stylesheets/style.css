@@ -630,3 +630,11 @@ select option{
     margin: 15px;
     cursor: pointer;
 }
+.list-image-container img{
+    width: 52.5px;
+    height: 52.5px;
+}
+.component-details--img img{
+    height: 180px;
+    width: auto;
+}

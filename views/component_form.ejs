@@ -19,13 +19,13 @@
                     <% if (typeof component !='undefined' && component.fileName && typeof component.fileName
                         !='undefined' ) { %>
                         <img src="/images/<%= component.fileName %>" alt="<%= component.fileName %>">
-                        <a href="<%= component.url %>/image/delete"><i class="fas fa-times"></i></a>
+                        <!-- <a href="<%= component.url %>/image/delete"><i class="fas fa-times"></i></a> -->
 
                         <% } else { %>
                             <div class="imgNotFound"><i class="fas fa-question"></i></div>
                             <% } %>
                 </div>
-                <form action="" method="POST" id="componentForm">
+                <form action="" method="POST" enctype="multipart/form-data" id="componentForm">
                     <fieldset>
                         <legend>NAME</legend>
                         <input minlength="3" required type="text" name="name" id="name"
@@ -98,7 +98,7 @@
                     <fieldset>
                         <legend>COMPONENT IMAGE</legend>
                         <label class="label hidden" for="part_image">Chose a file</label>
-                        <input class="" type="file" name="part_image" id="part_image">
+                        <input  class="" type="file" name="part_image" id="part_image">
                     </fieldset>
                     <% if (typeof component !='undefined' ) { %>
                         <input type="hidden" name="fileName" id="fileName" value="<%= component.fileName %>">

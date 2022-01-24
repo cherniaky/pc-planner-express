@@ -9,6 +9,33 @@ const Manufacturer = require("../models/manufacturer");
 
 let path = require('path');
 
+const multer = require("multer");
+var storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, "public/images");
+    },
+    filename: function (req, file, cb) {
+        cb(null, Date.now() + "-" + file.originalname);
+    },
+});
+var upload = multer({
+    storage: storage,
+    fileFilter: function (req, file, callback) {
+        var ext = path.extname(file.originalname);
+        if (
+            ext !== ".png" &&
+            ext !== ".jpg" &&
+            ext !== ".gif" &&
+            ext !== ".jpeg"
+        ) {
+            return callback(new Error("Only images are allowed"));
+        }
+        callback(null, true);
+    },
+    limits: { fileSize: 1000000 },
+});
+
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.redirect("main");
@@ -60,7 +87,7 @@ router.get(
 // // POST request for creating ComputerPart.
 router.post(
   "/component/create",
- // upload.single("part_image"),
+  upload.single("part_image"),
   computerpart_controller.computerpart_create_post
 );
 
@@ -97,7 +124,7 @@ router.get(
 // // POST request to update ComputerPart.
 router.post(
   "/component/:id/update",
- // upload.single("part_image"),
+  upload.single("part_image"),
   computerpart_controller.computerpart_update_post
 );
 

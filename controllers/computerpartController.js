@@ -110,14 +110,15 @@ exports.computerpart_create_post = [
             manufacturer: req.body.manufacturer,
         });
 
-        // if (req.file && errors.isEmpty()) {
-        //     console.log("FILE", req.file);
-        //     component.fileName = req.file.filename;
-        //     fs.unlink(`public/images/${req.body.fileName}`, (err) => {
-        //         if (err) console.log(err);
-        //         console.log(req.body.fileName, "was deleted");
-        //     });
-        // } else if (
+        if (req.file && errors.isEmpty()) {
+            console.log("FILE", req.file);
+            component.fileName = req.file.filename;
+            // fs.unlink(`public/images/${req.body.fileName}`, (err) => {
+            //     if (err) console.log(err);
+            //     console.log(req.body.fileName, "was deleted");
+            // });
+        }
+        // else if (
         //     req.body.fileName &&
         //     req.body.fileName != "null" &&
         //     req.body.fileName != "undefined"
@@ -362,14 +363,15 @@ exports.computerpart_update_post = [
                 _id: req.params.id,
             });
 
-            // if (req.file && errors.isEmpty()) {
-            //     console.log("FILE", req.file);
-            //     component.fileName = req.file.filename;
-            //     fs.unlink(`public/images/${req.body.fileName}`, (err) => {
-            //         if (err) console.log(err);
-            //         console.log(req.body.fileName, "was deleted");
-            //     });
-            // } else if (
+            if (req.file && errors.isEmpty()) {
+                console.log("FILE", req.file);
+                component.fileName = req.file.filename;
+                fs.unlink(`public/images/${req.body.fileName}`, (err) => {
+                    if (err) console.log(err);
+                    console.log(req.body.fileName, "was deleted");
+                });
+            }
+            // else if (
             //     req.body.fileName &&
             //     req.body.fileName != "null" &&
             //     req.body.fileName != "undefined"
