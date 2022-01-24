@@ -25,7 +25,7 @@
                             <div class="imgNotFound"><i class="fas fa-question"></i></div>
                             <% } %>
                 </div>
-                <form action="" method="POST"  id="componentForm">
+                <form action="" method="POST" id="componentForm">
                     <fieldset>
                         <legend>NAME</legend>
                         <input minlength="3" required type="text" name="name" id="name"
@@ -61,9 +61,10 @@
                             <select name="category" id="category" required>
                                 <% categories.forEach(category=> { %>
                                     <% if (typeof component !='undefined' ) { %>
-                                        <% var selected=category._id.toString()===component.category._id.toString()
-                                            ? 'selected' : '' %>
-                                            <option value="<%= category._id %>" <%=selected %> ><%= category.title %>
+                                       
+                                            <option value="<%= category._id %>"
+                                                <%= category._id.toString()===component.category._id.toString()
+                                                ? 'selected' : '' %> ><%= category.title %>
                                             </option>
                                             <% } else { %>
                                                 <option value="<%= category._id %> ">
@@ -78,18 +79,18 @@
                             <select name="manufacturer" id="manufacturer" required>
                                 <% manufacturers.forEach(manufacturer=> { %>
                                     <% if (typeof component !='undefined' ) { %>
-                                        <% var
-                                            selected=manufacturer._id.toString()===component.manufacturer._id.toString()
-                                            ? 'selected' : '' %>
-                                            <option value="<%= manufacturer._id %>" <%=selected %>> <%=
-                                                    manufacturer.name %>
+
+                                        <option value="<%= manufacturer._id %>"
+                                            <%=manufacturer._id.toString()===component.manufacturer._id.toString()? 'selected'
+                                            :'' %> >
+                                            <%= manufacturer.name %>
+                                        </option>
+                                        <% } else { %>
+                                            <option value="<%= manufacturer._id %> ">
+                                                <%= manufacturer.name %>
                                             </option>
-                                            <% } else { %>
-                                                <option value="<%= manufacturer._id %> ">
-                                                    <%= manufacturer.name %>
-                                                </option>
-                                                <% } %>
-                                                    <% }) %>
+                                            <% } %>
+                                                <% }) %>
                             </select>
                         </fieldset>
                     </div>
@@ -97,7 +98,7 @@
                     <fieldset>
                         <legend>COMPONENT IMAGE</legend>
                         <label class="label hidden" for="part_image">Chose a file</label>
-                        <!-- <input class="" type="file" name="part_image" id="part_image"> -->
+                        <input class="" type="file" name="part_image" id="part_image">
                     </fieldset>
                     <% if (typeof component !='undefined' ) { %>
                         <input type="hidden" name="fileName" id="fileName" value="<%= component.fileName %>">
@@ -108,7 +109,14 @@
                                     <input type="password" name="password" id="password" required>
                                 </fieldset>
                                 <% } %>
-                                <div class="part-add"><button type="submit" class="yellow-btn block">Submit</button> </div>
+
+                                <% if(typeof error!='undefined' ){ %>
+                                    <p class="errorMsg">
+                                        <%= error %>
+                                    </p>
+                                    <% } %>
+                                    <div class="part-add"><button type="submit" class="yellow-btn block">Submit</button>
+                                    </div>
                 </form>
                 <a class="cancel block"
                     href="<%= typeof component == 'undefined' || component.isNew ? '/components' : component.url %>">Cancel</a>

@@ -64,17 +64,17 @@ router.post(
   computerpart_controller.computerpart_create_post
 );
 
-// // GET request to delete ComputerPart.
-// router.get(
-//   "/component/:id/delete",
-//   computerpart_controller.computerpart_delete_get
-// );
+// GET request to delete ComputerPart.
+router.get(
+  "/component/:id/delete",
+  computerpart_controller.computerpart_delete_get
+);
 
-// // POST request to delete ComputerPart.
-// router.post(
-//   "/component/:id/delete",
-//   computerpart_controller.computerpart_delete_post
-// );
+// POST request to delete ComputerPart.
+router.post(
+  "/component/:id/delete",
+  computerpart_controller.computerpart_delete_post
+);
 
 // // GET request to delete ComputerPart image.
 // router.get(
@@ -89,17 +89,17 @@ router.post(
 // );
 
 // // GET request to update ComputerPart.
-// router.get(
-//   "/component/:id/update",
-//   computerpart_controller.computerpart_update_get
-// );
+router.get(
+  "/component/:id/update",
+  computerpart_controller.computerpart_update_get
+);
 
 // // POST request to update ComputerPart.
-// router.post(
-//   "/component/:id/update",
-//   upload.single("part_image"),
-//   computerpart_controller.computerpart_update_post
-// );
+router.post(
+  "/component/:id/update",
+ // upload.single("part_image"),
+  computerpart_controller.computerpart_update_post
+);
 
 // // GET request for one ComputerPart.
  router.get("/component/:id", computerpart_controller.computerpart_detail);

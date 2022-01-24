@@ -110,28 +110,28 @@ exports.computerpart_create_post = [
             manufacturer: req.body.manufacturer,
         });
 
-        if (req.file && errors.isEmpty()) {
-            console.log("FILE", req.file);
-            component.fileName = req.file.filename;
-            fs.unlink(`public/images/${req.body.fileName}`, (err) => {
-                if (err) console.log(err);
-                console.log(req.body.fileName, "was deleted");
-            });
-        } else if (
-            req.body.fileName &&
-            req.body.fileName != "null" &&
-            req.body.fileName != "undefined"
-        ) {
-            component.fileName = req.body.fileName;
-        }
+        // if (req.file && errors.isEmpty()) {
+        //     console.log("FILE", req.file);
+        //     component.fileName = req.file.filename;
+        //     fs.unlink(`public/images/${req.body.fileName}`, (err) => {
+        //         if (err) console.log(err);
+        //         console.log(req.body.fileName, "was deleted");
+        //     });
+        // } else if (
+        //     req.body.fileName &&
+        //     req.body.fileName != "null" &&
+        //     req.body.fileName != "undefined"
+        // ) {
+        //     component.fileName = req.body.fileName;
+        // }
 
         if (!errors.isEmpty()) {
-            if (req.file) {
-                fs.unlink(`public/images/${req.file.filename}`, (err) => {
-                    if (err) console.log(err);
-                    console.log(req.file.filename, "was deleted");
-                });
-            }
+            // if (req.file) {
+            //     fs.unlink(`public/images/${req.file.filename}`, (err) => {
+            //         if (err) console.log(err);
+            //         console.log(req.file.filename, "was deleted");
+            //     });
+            // }
             async.parallel(
                 {
                     categories: function (callback) {
@@ -199,18 +199,40 @@ exports.computerpart_delete_get = function (req, res, next) {
 // Handle ComputerPart delete on POST.
 exports.computerpart_delete_post = function (req, res, next) {
     if (req.body.password != process.env.ADMIN_PASSWORD) {
-        let err = new Error("The password you entered is incorrect.");
-        err.status = 401;
-        return next(err);
+        ComputerPart.findById(req.params.id)
+            .populate("category")
+            .populate("manufacturer")
+            .exec(function (err, component) {
+                if (err) next(err);
+
+                if (component == null) {
+                    let err = new Error(
+                        "Component not found. It may have been deleted, or does not exist."
+                    );
+                    err.status = 404;
+                    return next(err);
+                }
+
+                res.render("component_delete", {
+                    title: "Delete Component: " + component.name,
+                    component: component,
+                    category: component.category,
+                    manufacturer: component.manufacturer,
+                    errors: ["The password you entered is incorrect."],
+                });
+            });
+        // let err = new Error("The password you entered is incorrect.");
+        // err.status = 401;
+        // return next(err);
     } else {
         ComputerPart.findByIdAndRemove(
             req.body.id,
             function deleteComponent(err) {
                 if (err) return next(err);
-                fs.unlink(`public/images/${req.body.filename}`, (err) => {
-                    if (err) console.log(err);
-                    console.log(req.body.filename, "was deleted");
-                });
+                // fs.unlink(`public/images/${req.body.filename}`, (err) => {
+                //     if (err) console.log(err);
+                //     console.log(req.body.filename, "was deleted");
+                // });
                 res.redirect("/components");
             }
         );
@@ -281,15 +303,53 @@ exports.computerpart_update_post = [
 
     (req, res, next) => {
         if (req.body.password != process.env.ADMIN_PASSWORD) {
-            if (req.file) {
-                fs.unlink(`public/images/${req.file.filename}`, (err) => {
-                    if (err) console.log(err);
-                    console.log(req.file.filename, "was deleted");
-                });
-            }
-            let err = new Error("The password you entered is incorrect.");
-            err.status = 401;
-            return next(err);
+
+            async.parallel(
+                {
+                    component: function (callback) {
+                        ComputerPart.findById(req.params.id)
+                            .populate("category")
+                            .populate("manufacturer")
+                            .exec(callback);
+                    },
+                    categories: function (callback) {
+                        Category.find().exec(callback);
+                    },
+                    manufacturers: function (callback) {
+                        Manufacturer.find().exec(callback);
+                    },
+                },
+                function (err, results) {
+                    if (err) return next(err);
+
+                    if (results.component == null) {
+                        let err = new Error(
+                            "Component not found. It may have been deleted, or does not exist."
+                        );
+                        err.status = 404;
+                        return next(err);
+                    }
+
+                    res.render("component_form", {
+                        title: "Update Component",
+                        component: results.component,
+                        categories: results.categories,
+                        manufacturers: results.manufacturers,
+                        isUpdating: true,
+                        error: "The password you entered is incorrect.",
+                    });
+                }
+            );
+            // if (req.file) {
+            //     fs.unlink(`public/images/${req.file.filename}`, (err) => {
+            //         if (err) console.log(err);
+            //         console.log(req.file.filename, "was deleted");
+            //     });
+            // }
+            // let err = new Error("The password you entered is incorrect.");
+            // err.status = 401;
+            // return next(err);
+
         } else {
             const errors = validationResult(req);
             const component = new ComputerPart({
@@ -302,28 +362,28 @@ exports.computerpart_update_post = [
                 _id: req.params.id,
             });
 
-            if (req.file && errors.isEmpty()) {
-                console.log("FILE", req.file);
-                component.fileName = req.file.filename;
-                fs.unlink(`public/images/${req.body.fileName}`, (err) => {
-                    if (err) console.log(err);
-                    console.log(req.body.fileName, "was deleted");
-                });
-            } else if (
-                req.body.fileName &&
-                req.body.fileName != "null" &&
-                req.body.fileName != "undefined"
-            ) {
-                component.fileName = req.body.fileName;
-            }
+            // if (req.file && errors.isEmpty()) {
+            //     console.log("FILE", req.file);
+            //     component.fileName = req.file.filename;
+            //     fs.unlink(`public/images/${req.body.fileName}`, (err) => {
+            //         if (err) console.log(err);
+            //         console.log(req.body.fileName, "was deleted");
+            //     });
+            // } else if (
+            //     req.body.fileName &&
+            //     req.body.fileName != "null" &&
+            //     req.body.fileName != "undefined"
+            // ) {
+            //     component.fileName = req.body.fileName;
+            // }
 
             if (!errors.isEmpty()) {
-                if (req.file) {
-                    fs.unlink(`public/images/${req.file.filename}`, (err) => {
-                        if (err) console.log(err);
-                        console.log(req.file.filename, "was deleted");
-                    });
-                }
+                // if (req.file) {
+                //     fs.unlink(`public/images/${req.file.filename}`, (err) => {
+                //         if (err) console.log(err);
+                //         console.log(req.file.filename, "was deleted");
+                //     });
+                // }
 
                 async.parallel(
                     {
